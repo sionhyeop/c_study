@@ -1,8 +1,0 @@
-# 모든 파일 제외
-*
-
-# whitelist
-!.gitignore
-!*/
-!**/*.c
-!**/*.pdf
