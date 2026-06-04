@@ -4,30 +4,44 @@
 
 int main(void)
 {
-    FILE *fp1, *fp2;
-    char file1[100], file2[100];
-    char buffer[100];
+    FILE *fp;
+    char fname[100];
+    int number, count = 0;
+    char name[20];
+    float score, total = 0.0;
 
-    printf("원본 파일 이름: ");
-    scanf("%s", file1);
-    printf("복사 파일 이름: ");
-    scanf("%s", file2);
+    printf("성적 파일 이름을 입력하시오: ");
+    scanf("%s", fname);
 
-    if ((fp1 = fopen(file1, "r")) == NULL)
+    if ((fp = fopen(fname, "w")) == NULL)
     {
-        fprintf(stderr, "원본 파일 %s을 열 수 없습니다.\n", file1);
-        exit(1);
-    }
-    if ((fp2 = fopen(file2, "w")) == NULL)
-    {
-        fprintf(stderr, "복사 파일 %s을 열 수 없습니다.\n", file2);
+        fprintf(stderr, "성적 파일 %s을 열 수 없습니다.\n", fname);
         exit(1);
     }
 
-    while (fgets(buffer, 100, fp1) != NULL)
-        fputs(buffer, fp2);
+    while (1)
+    {
+        printf("학번, 이름, 성적을 입력하시요: (음수이면 종료)");
+        scanf("%d", &number);
+        if (number < 0) break;
+        scanf("%s %f", name, &score);
+        fprintf(fp, " %d %s %f", number, name, score);
+    }
+    fclose(fp);
 
-    fclose(fp1);
-    fclose(fp2);
+    if ((fp = fopen(fname, "r")) == NULL)
+    {
+        fprintf(stderr, "성적 파일 %s을 열 수 없습니다.\n", fname);
+        exit(1);
+    }
+
+    while (!feof(fp))
+    {
+        fscanf(fp, "%d %s %f", &number, name, &score);
+        total += score;
+        count++;
+    }
+    printf("평균= %f\n", total / count);
+    fclose(fp);
     return 0;
 }

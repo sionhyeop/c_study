@@ -4,7 +4,7 @@
 int main(void)
 {
     FILE *fp = NULL;
-    fp = fopen("sample.txt", "w");
+    fp = fopen("sample1.txt", "w");
     if (fp == NULL)
         printf("파일 열기 실패\n");
     else

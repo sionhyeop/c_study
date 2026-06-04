@@ -7,14 +7,15 @@ struct student {
     int number;
     char name[20];
     double gpa;
+    char address[50];
 };
 
 int main(void)
 {
     struct student table[SIZE] = {
-        { 1, "Kim", 3.99 },
-        { 2, "Min", 2.68 },
-        { 3, "Lee", 4.01 }
+        { 1, "Kim", 3.99, "Seoul" },
+        { 2, "Min", 2.68, "Busan" },
+        { 3, "Lee", 4.01, "Daegu" }
     };
     struct student s;
     FILE *fp = NULL;
@@ -36,7 +37,7 @@ int main(void)
     for (i = 0; i < SIZE; i++)
     {
         fread(&s, sizeof(struct student), 1, fp);
-        printf("학번= %d, 이름= %s, 평점= %.2f\n", s.number, s.name, s.gpa);
+        printf("학번= %d, 이름= %s, 평점= %f, 주소= %s\n", s.number, s.name, s.gpa, s.address);
     }
     fclose(fp);
     return 0;
