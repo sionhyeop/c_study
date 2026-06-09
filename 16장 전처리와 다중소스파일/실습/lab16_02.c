@@ -1,11 +1,12 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#define DELUXE
+#define LINUX
 
 int main(void)
 {
-#ifdef DELUXE
-    printf("딜럭스 버전입니다. \n");
+#ifdef LINUX
+    printf("리눅스 버전입니다. \n");
+#else
+    printf("윈도우 버전입니다. \n");
 #endif
     return 0;
 }
