@@ -1,26 +1,31 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-
-struct Book {
-    int number;
-    char title[50];
-};
 
 int main(void)
 {
-    struct Book *p;
+    int *list;
+    int i;
+    int students;
 
-    p = (struct Book *)malloc(2 * sizeof(struct Book));
-    if (p == NULL) {
-        printf("메모리 할당 오류\n");
+    printf("학생의 수: ");
+    scanf("%d", &students);
+
+    list = (int *)malloc(students * sizeof(int));
+    if (list == NULL) {
+        printf("동적메모리 할당 오류\n");
         exit(1);
     }
-    (p + 0)->number = 1;
-    strcpy((p + 0)->title, "C Programming");
-    (p + 1)->number = 2;
-    strcpy((p + 1)->title, "Data Structure");
-    free(p);
+
+    for (i = 0; i < students; i++) {
+        printf("학생#%d 성적: ", i + 1);
+        scanf("%d", &list[i]);
+    }
+    printf("=========================\n");
+    for (i = 0; i < students; i++) {
+        printf("학생#%d 성적: %d \n", i + 1, list[i]);
+    }
+    printf("=========================\n");
+    free(list);
     return 0;
 }
